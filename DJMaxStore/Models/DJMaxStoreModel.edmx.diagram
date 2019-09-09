@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d302b970c93846f7b7f421df3f02ee2f" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="DJMaxStoreModel.Category" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DJMaxStoreModel.Customer" Width="1.5" PointX="8.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DJMaxStoreModel.OrderItem" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DJMaxStoreModel.Order" Width="1.5" PointX="6.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DJMaxStoreModel.Product" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="DJMaxStoreModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="DJMaxStoreModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="DJMaxStoreModel.FK_OrderItems_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="DJMaxStoreModel.FK_OrderItems_Products" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

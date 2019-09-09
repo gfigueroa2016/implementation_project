@@ -1,0 +1,41 @@
+﻿<!--Esta es la pagina donde el usuario ve los detalles del producto seleccionado-->
+@model DJMaxStore.Models.Product
+
+@{
+    ViewBag.Title = "DJMax Shop";
+}
+
+<h2>
+    Tienda Virtual
+</h2>
+<div style="display:inline-block">
+    <div style="width:190px; float:left;">
+        <img src="@Model.Image" width="170" height="276" alt="@Model.ProductName" title="@Model.ProductName">
+    </div>
+    <div style="width:70%; float:left;">
+        <!--Aparece el ProductName, Details, Price-->
+        <h1>
+            @Html.DisplayFor(modelItem => Model.ProductName)
+        </h1>
+        <p>
+            @Html.Raw(@Model.Details)
+        </p>
+        <p>
+            $@Html.DisplayFor(modelItem => Model.Price)
+        </p>
+        <p>
+            @Html.ActionLink("More Info", "Index", "Info", new { id = Model.ProductID }, new { id = "ProductID" })
+        </p>
+        @using (Html.BeginForm("AddToCart", "ShoppingCart"))
+        
+        {
+            <div class="pull-right">
+                @Html.HiddenFor(x => x.ProductID)
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="Add to cart" />
+            </div>
+
+        }
+    </div>
+</div>
+            <!--Al usuario culminar ver el producto, selcciona el boton de Add to cart o puede volver al Shop-->

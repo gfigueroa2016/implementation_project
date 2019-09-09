@@ -1,0 +1,21 @@
+﻿<!--Este es el Widget que llama la informacion del modelo del ShoppingCartModel-->
+@model DJMaxStore.Models.ShoppingCartModel
+<!--Boton de accion para ser regidirido al checkout-->
+<div class="navbar-right hidden-xs" style="margin-left:7px">
+    @Html.ActionLink("Checkout", "Index", "ShoppingCart",
+        new { returnUrl = Request.Url.PathAndQuery },
+        new { @class = "btn btn-default navbar-btn" })
+</div>
+<!--Llama consulta de los productos seleccionado en el shopping cart-->
+<div class="navbar-right visible-xs" style="margin-left:7px">
+    <a href=@Url.Action("Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery })
+       class="btn btn-default navbar-btn">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>
+</div>
+<!--Suma la cantidad de productos con sus precios el cual da un total-->
+<div class="navbar-text navbar-right">
+    <b class="hidden-xs">Carro:</b>
+    @Model.Items.Sum(x => x.Quantity) item(s),
+    @Model.GetCartTotal().ToString("c")
+</div>

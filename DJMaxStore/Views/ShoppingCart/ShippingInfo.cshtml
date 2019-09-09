@@ -1,0 +1,33 @@
+﻿<!--Esta pagina es para que el usuario ingrese los datos de envio de la orden-->
+@model DJMaxStore.Models.ShippingInfo
+
+@{
+    ViewBag.Title = "Shipping Information";
+}
+<!--El usuario ingresa los datos de envio, de las variables Address, City, State, Zip y luego las ingresa
+    seleccionando el boton, los datos son enviados al Controller, el cual luego las envia al model de ShippinInfo
+    actualizando la base de datos de OrderItem-->
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()    
+    <h3>Enviar a:</h3>
+    <div class="form-group">
+        <label>Direccion</label>
+        @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Ciudad</label>
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Estado</label>
+        @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Codigo Postal</label>
+        @Html.TextBoxFor(x => x.Zip, new { @class = "form-control" })
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Next" />
+    </div>
+}

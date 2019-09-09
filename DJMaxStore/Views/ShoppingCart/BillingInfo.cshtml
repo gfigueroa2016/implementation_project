@@ -1,0 +1,48 @@
+﻿<!--Esta es la pagina donde el usuario ingresa la informacion de BillingInfo para propositos de facturacion-->
+@model DJMaxStore.Models.BillingInfo
+
+@{
+    ViewBag.Title = "Billing Information";
+}
+<!--El usuario ingresa la data de las variables FirstName, LastName, CreditCardNumber, ExpirationMonth, ExpirationYear, 
+    Address, City, State y Zip-->
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()    
+    <h3>Facturar a:</h3>
+    <div class="form-group">
+        <label>Nombre</label>
+        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+        <label>Apellido</label>
+        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Numero de Tarjeta de Credito</label>
+        @Html.TextBoxFor(x => x.CreditCardNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Fecha de Expiracion</label>
+        @Html.DropDownListFor(x => x.ExpirationMonth, Model.Months(), "--Expiration Month--", new { @class = "form-control" })
+        @Html.DropDownListFor(x => x.ExpirationYear, Model.Years(), "--Expiration Year--", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Direccion</label>
+        @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Ciudad</label>
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Estado</label>
+        @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Codigo Postal</label>
+        @Html.TextBoxFor(x => x.Zip, new { @class = "form-control" })
+    </div>
+    <!--Usuario ingresa la informacion al controlador para ser enviado al modelo de BillingInfo
+        seleccionando el boton de checkout-->
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Checkout" />
+    </div>
+}

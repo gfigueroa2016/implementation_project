@@ -1,0 +1,49 @@
+﻿<!--En esta pagina de Shop, el usuario escoge los articulos para añadirlos al ShoppingCart, en donde
+    calculados para hacer el checkout-->
+@model DJMaxStore.Models.ProductsModel
+
+@{
+    ViewBag.Title = "DJMax Shop";
+}
+
+<h2>
+    Tienda Virtual
+</h2>
+<!--Comienza la forma de seleccionar los articulos-->
+@using (Html.BeginForm("Index", "Shop", FormMethod.Post, new { id = "ShopForm" }))
+{
+    <!--La paginacion oculta de la pagina corriente, la cantidad especifica de articulos por pagina y el total de
+        articulos que el usuario ve-->
+    @Html.HiddenFor(x => x.Pagination.CurrentPage);
+    @Html.HiddenFor(x => x.Pagination.ItemsPerPage);
+    @Html.HiddenFor(x => x.Pagination.TotalItems);
+    <div class="well">
+        <div>
+            <!--El usuario puede filtrar los articulos seleccionando el menu expandible de las categorias, en donde
+                demostrara las categorias de Mixers, CD Players, Speakers y Headphones -->
+            Categorias:
+            @Html.DropDownListFor(x => x.CategoryID, Model.Categories(), "--Select a Category--",
+                new
+                {
+                    onchange = "document.getElementById('ShopForm').submit();"
+                })
+            <!--Al escoger una categoria especifica, hace una llamada de busqueda a la base de datos para extraer los articulos
+                especificos con el numero de categoria relacionado al articulo en la columna de CategoryID-->
+            <span class="pull-right">
+                Search For:
+                @Html.TextBoxFor(x => x.SearchString)
+                <input type="submit" value="Search" />
+            </span>
+        </div>
+    </div>
+    <!--Se logra ver en la vista los articulos especificos de la bases de datos de Productos-->
+    foreach (var item in Model.Products)
+    {
+        @Html.Partial("Product", item)
+    }
+    <!--La accion genera una consulta con la lista especifica de los articulos relacionados a la categoria especifica del
+        CategoryID-->
+    <div class="btn-group pull-right">
+        @Html.PageLinks(Model.Pagination, x => Url.Action("Index", new { page = x, categoryID = Model.CategoryID }))
+    </div>
+}

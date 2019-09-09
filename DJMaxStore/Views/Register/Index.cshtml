@@ -1,0 +1,55 @@
+﻿<!--Este es la pagina donde el usuario se registra, somete la informacion a los Controllers, 
+    los controllers envian la informacion a los modelos para actualizar la base de datos de Customer-->
+@model DJMaxStore.Models.Customer
+@{
+    ViewBag.Title = "DJMax Register User";
+}
+<!--Comienza la forma de html de registro-->
+@using (Html.BeginForm("Register", "Register"))
+{
+    <!--Usuario registra el campo de FirstName el cual se acumula la data en la variable FirstName-->
+    @Html.ValidationSummary()
+    <h3>Registro de Usuario:</h3>
+    <div class="form-group">
+        <label>Nombre</label>
+        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+        <!--Usuario registra el campo de LastName el cual se acumula la data en la variable LastName-->
+        <label>Apellido</label>
+        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de Address el cual se acumula la data en la variable Address-->
+        <label>Direccion</label>
+        @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de City el cual se acumula la data en la variable City-->
+        <label>Ciudad</label>
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de Estado el cual se acumula la data en la variable Estado-->
+        <label>Estado</label>
+        @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de CodigoPostal el cual se acumula la data en la variable CodigoPostal-->
+        <label>Codigo Postal</label>
+        @Html.TextBoxFor(x => x.PostalCode, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de Email el cual se acumula la data en la variable Email-->
+        <label>Correo Electronico (Este sera su nombre de usuario)</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <!--Usuario registra el campo de Password el cual se acumula la data en la variable Password-->
+        <label>Contraseña</label>
+        @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+    </div>
+
+    <div class="text-center">
+        <!--Usuario aprieta el boton de someter la data hacia las variables en los Controllers-->
+        <input class="btn btn-primary" type="submit" value="Register" />
+    </div>
+}

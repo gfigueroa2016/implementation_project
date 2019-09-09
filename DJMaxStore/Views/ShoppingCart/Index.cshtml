@@ -1,0 +1,83 @@
+﻿<!--Este es la pagina donde demuestra la cantidad, los articulos y el sub total del shoppingcart-->
+@model DJMaxStore.Models.ShoppingCartViewModel
+@{
+    ViewBag.Title = "DJMax Shopping Cart";
+}
+
+<h2>
+    Carro de Compras
+</h2>
+<table id="cartTable" class="table" >
+    <thead>
+        <tr>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Articulo
+            </th>
+            <th class="text-right">
+                Precio
+            </th>
+            <th class="text-right">
+                Subtotal
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Se llama la variable Quantity, ProductName, Price y el total-->
+        @foreach (var item in Model.Cart.Items)
+        {
+            <tr>
+                <td class="text-center">
+                    @item.Quantity
+                </td>
+                <td class="text-left">
+                    @item.Product.ProductName
+                </td>
+                <td class="text-right">
+                    @item.Product.Price.ToString("c")
+                </td>
+                <td class="text-right">
+                    @((item.Quantity * item.Product.Price).ToString("c"))
+                </td>
+                <td>
+                    <!--Botones para eliminar articulos del shoppingcart generando una nueva consulta-->
+                    @using (Html.BeginForm("RemoveFromCart", "ShoppingCart"))
+                    {
+                        @Html.Hidden("ProductId", item.Product.ProductID)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn btn-sm btn-warning"
+                               type="submit" value="Remove" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <!--Total de precio de los articulos seleccionados-->
+            <td colspan="3" class="text-right">
+                Total:
+            </td>
+            <td class="text-right">
+                @Model.Cart.GetCartTotal().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <!--Botones para seguir comprando en la pagina de shop o proceder al checkout-->
+    <a class="btn btn-primary" href="@Model.ReturnUrl">
+        Continuar Comprando
+    </a>
+<!--Boton de accion donde el usuario selecciona checkout e ingresa el ShippingInfo-->
+    @Html.ActionLink("Checkout", "ShippingInfo", null, new { @class = "btn btn-primary" })
+</div>
+
+<style>
+    #cartTable td
+    {
+        vertical-align:middle;
+    }
+</style>

@@ -1,0 +1,24 @@
+﻿<!--En esta pagina el usuario inicia sesion de nombre de usuario y contraseña para poder comprar-->
+@model DJMaxStore.Models.Customer
+@{
+    ViewBag.Title = "DJMax Login";
+}
+<!--Esta es la forma donde el usuario ingresa el correoelectronico, el cual es el nombre de usuario y la contraseña-->
+<!--Si el usuario no pone el nombre de usuario y la contraseña correcta, aparece mensajes de errores-->
+<h3>Inicio de sesion:</h3>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "El inicio fallo. Verifique sus detalles de iniciar sesion.");
+    <div class="form-group">
+        <label>Correo Electronico</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+    </div>
+<!--El usuario selecciona el boton de someter para actualizar la base de datos con la entrada de los datos-->
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Log In" />
+    </div>
+}
